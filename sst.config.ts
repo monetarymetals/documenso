@@ -37,9 +37,14 @@ export default $config({
       },
     });
     const fromAddress = process.env.NEXT_PRIVATE_SMTP_FROM_ADDRESS ?? 'noreply@documenso.com';
-    const email = new sst.aws.Email('DocumensoEmail', { sender: fromAddress });
 
-    const api = new sst.aws.ApiGatewayV2('DocumensoApi', { vpc });
+    const api = new sst.aws.ApiGatewayV2('DocumensoApi', {
+      vpc,
+      ...(process.env.NEXT_PUBLIC_WEBAPP_URL
+        ? { cors: { allowOrigins: [process.env.NEXT_PUBLIC_WEBAPP_URL] } }
+        : {}),
+    });
+    const webAppUrl = process.env.NEXT_PUBLIC_WEBAPP_URL ?? api.url;
     const documentBucket = new sst.aws.Bucket('DocumensoDocumentBucket');
 
     // Secrets management - using SST secrets for better security
@@ -63,8 +68,8 @@ export default $config({
       NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: encryptionSecondaryKey.value,
 
       // URLs
-      NEXT_PUBLIC_WEBAPP_URL: api.url,
-      NEXT_PRIVATE_INTERNAL_WEBAPP_URL: api.url,
+      NEXT_PUBLIC_WEBAPP_URL: webAppUrl,
+      NEXT_PRIVATE_INTERNAL_WEBAPP_URL: webAppUrl,
 
       // Database
       NEXT_PRIVATE_DATABASE_URL: $interpolate`postgres://${db.username}:${db.password}@${db.host}:${db.port}/${db.database}`,
@@ -107,7 +112,7 @@ export default $config({
         dockerfile: 'docker/Dockerfile',
         context: '.',
       },
-      link: [db, documentBucket, email],
+      link: [db, documentBucket],
       environment,
       serviceRegistry: {
         port: appPort,
