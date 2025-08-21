@@ -21,6 +21,7 @@ export default $config({
   },
   async run() {
     const isProduction = $app.stage === 'production';
+    const account = aws.getCallerIdentityOutput();
 
     // TODO: use static VPC get to obtain the existing VPC
     const vpc = new sst.aws.Vpc('DocumensoVpc');
@@ -37,6 +38,7 @@ export default $config({
       },
     });
     const fromAddress = process.env.NEXT_PRIVATE_SMTP_FROM_ADDRESS ?? 'noreply@documenso.com';
+    const emailIdentity = fromAddress.split('@')[1];
 
     const api = new sst.aws.ApiGatewayV2('DocumensoApi', {
       vpc,
@@ -113,6 +115,14 @@ export default $config({
         context: '.',
       },
       link: [db, documentBucket],
+      permissions: [
+        {
+          actions: ['ses:*'],
+          resources: [
+            $interpolate`arn:aws:ses:${region}:${account.accountId}:identity/${emailIdentity}`,
+          ],
+        },
+      ],
       environment,
       serviceRegistry: {
         port: appPort,
