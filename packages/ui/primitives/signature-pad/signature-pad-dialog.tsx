@@ -6,10 +6,11 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 
 import { parseMessageDescriptor } from '@documenso/lib/utils/i18n';
+import { cn } from '@documenso/ui/lib/utils';
 import { Dialog, DialogClose, DialogContent, DialogFooter } from '@documenso/ui/primitives/dialog';
 
-import { cn } from '../../lib/utils';
 import { Button } from '../button';
+import { DocumentSigningDisclosure } from './document-signing-disclosure';
 import { SignaturePad } from './signature-pad';
 import { SignatureRender } from './signature-render';
 
@@ -120,6 +121,8 @@ export const SignaturePadDialog = ({
             uploadSignatureEnabled={uploadSignatureEnabled}
             drawSignatureEnabled={drawSignatureEnabled}
           />
+
+          <DocumentSigningDisclosure />
 
           <DialogFooter>
             <DialogClose asChild>
