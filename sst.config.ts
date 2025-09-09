@@ -36,6 +36,11 @@ export default $config({
         password: 'password',
         port: 54320,
       },
+      transform: {
+        instance: {
+          engineVersion: '16.8',
+        },
+      },
     });
     const fromAddress = process.env.NEXT_PRIVATE_SMTP_FROM_ADDRESS ?? 'noreply@documenso.com';
     const emailIdentity = fromAddress.split('@')[1];
