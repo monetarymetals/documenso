@@ -136,8 +136,8 @@ export default $config({
         min: isProduction ? 2 : 1,
         max: isProduction ? 10 : 3,
       },
-      memory: isProduction ? ('2 GB' as const) : ('1 GB' as const),
-      cpu: isProduction ? ('1 vCPU' as const) : ('0.5 vCPU' as const),
+      memory: isProduction ? ('4 GB' as const) : ('2 GB' as const),
+      cpu: isProduction ? ('2 vCPU' as const) : ('1 vCPU' as const),
       // Health check configuration
       health: {
         // TODO: fix health check
