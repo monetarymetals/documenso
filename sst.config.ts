@@ -99,7 +99,7 @@ export default $config({
       NEXT_PRIVATE_SES_REGION: region,
 
       // Feature flags
-      NEXT_PUBLIC_DISABLE_SIGNUP: process.env.NEXT_PUBLIC_DISABLE_SIGNUP ?? 'false',
+      NEXT_PUBLIC_DISABLE_SIGNUP: process.env.NEXT_PUBLIC_DISABLE_SIGNUP ?? 'true',
       NEXT_PUBLIC_DOCUMENT_SIZE_UPLOAD_LIMIT:
         process.env.NEXT_PUBLIC_DOCUMENT_SIZE_UPLOAD_LIMIT ?? '50',
 
