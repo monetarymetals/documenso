@@ -30,6 +30,7 @@ export default $config({
     // Database configuration
     const db = new sst.aws.Postgres('DocumensoDB', {
       vpc,
+      multiAz: isProduction,
       dev: {
         database: 'documenso',
         username: 'documenso',
