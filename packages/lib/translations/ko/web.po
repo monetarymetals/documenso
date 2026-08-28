@@ -6567,8 +6567,8 @@ msgid "The document is already saved and cannot be changed."
 msgstr "문서가 이미 저장되어 있으며 변경할 수 없습니다."
 
 #: apps/remix/app/components/embed/embed-document-completed.tsx
-msgid "The document is now completed, please follow any instructions provided within the parent application."
-msgstr "문서가 완료되었습니다． 상위 응용 프로그램 내에서 제공된 지침을 따르세요．"
+msgid "The document is now completed."
+msgstr "문서가 완료되었습니다."
 
 #: packages/email/template-components/template-document-rejection-confirmed.tsx
 msgid "The document owner has been notified of this rejection. No further action is required from you at this time. The document owner may contact you with any questions regarding this rejection."

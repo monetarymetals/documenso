@@ -6976,8 +6976,8 @@ msgid "The document is already saved and cannot be changed."
 msgstr "Dokument jest już zapisany i nie można go zmienić."
 
 #: apps/remix/app/components/embed/embed-document-completed.tsx
-msgid "The document is now completed, please follow any instructions provided within the parent application."
-msgstr "Dokument jest teraz zakończony, proszę postępować zgodnie z wszelkimi instrukcjami podanymi w aplikacji nadrzędnej."
+msgid "The document is now completed."
+msgstr "Dokument jest teraz zakończony."
 
 #: packages/email/template-components/template-document-rejection-confirmed.tsx
 msgid "The document owner has been notified of this rejection. No further action is required from you at this time. The document owner may contact you with any questions regarding this rejection."
