@@ -37,6 +37,13 @@ jobs:
           aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+      # The runner image ships Pulumi at /usr/local/bin. SST resolves the
+      # pulumi-language-nodejs plugin via PATH, so its bundled engine picks up
+      # the runner's newer plugin and fails with "flag provided but not defined:
+      # -root". Remove it so SST uses only its own Pulumi binaries.
+      - name: Remove preinstalled Pulumi
+        run: sudo rm -f /usr/local/bin/pulumi /usr/local/bin/pulumi-*
+
       - name: Deploy Infrastructure
         run: npm run sst:deploy -- --stage ${{ vars.STAGE }}
         env:
